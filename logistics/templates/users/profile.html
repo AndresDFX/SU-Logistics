@@ -1,0 +1,65 @@
+{% extends 'panel.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ profile.full_name }}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-sm-7">
+                <div class="card bg-light rounded-lg mt-5" >
+                    <div class="card-header">Perfil del Usuario</div>
+                    <div class="card-body">
+                      <p class="card-text">{{profile.full_name}}</p>
+                      <p class="card-text">{{profile.id_employee}}</p>
+                    </div>
+                </div>
+
+                <div class="row py-3">
+                    <div class="col">
+                        <img src="{{profile.image}}" height="200px" width="200px">
+                    </div>
+                    <div class="col">
+                        {{ profile.position }}<br>
+                        <i>{{ profile.zone }}</i><br>
+                        <i>{{ profile.region }}</i><br><br>
+                        <p class="card text-white bg-success mb-3">${{ profile.format_sales }}</p>
+                    </div>
+                </div>
+                <div>
+                    <b>Teléfono: </b> {{ profile.phone }}<br>
+                    <b>Email: </b> {{ profile.email }}<br><br>
+                    <b>Fecha de Nacimiento: </b> {{ profile.birth_date|date:"j/M/Y"}}<br>
+                    <b>Cédula: </b> {{ profile.document_id }}<br><br>
+                    <b>Fecha de Ingreso: </b> {{ profile.admission_date |date:"j/M/Y"}}<br>
+                    <b>Jefe: </b> <a href="{% url 'app_users:profile' employee.id %}">{{ employee.full_name }}</a> <br><br>
+                </div>
+                {% if subalternos %}
+                <h3>Subalternos</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Ventas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for subalterno in subalternos %}
+                            <tr>
+                                <td><a href="{% url 'app_users:profile' subalterno.id %}">{{ subalterno.full_name }}</a></td>
+                                <td>${{ subalterno.format_sales }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
