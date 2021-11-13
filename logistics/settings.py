@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from unipath import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).ancestor(2)
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).ancestor(2)
 SECRET_KEY = 'django-insecure-wf!sxgv!z!++6+^&(+zf%i^ufv3a$k@3xpa&+d5ohatd+3o92r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -153,3 +155,6 @@ AUTH_USER_MODEL = 'users.user'
 
 LOGIN_REDIRECT_URL = 'dashboard/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+django_heroku.settings (locals())
